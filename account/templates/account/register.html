@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block title %}
+Register
+{% endblock %}
+
+{% block content %}
+{% if request.user.is_authenticated %}
+ <p>You are already Logged in!!!</p>
+{%else %}
+<div class="jumbotron text-center">
+    <h4>Registration Page</h4>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h4>Registration Form</h4>
+                </div>
+                <div class="card-body">
+                   
+                    <form action="" method="POST" class="form">
+                        {% csrf_token %}
+                        {% bootstrap_form user_form %}
+                        {% buttons %}   
+                        <button type="submit" class="btn btn-primary">Register</button>
+                        {% endbuttons%}
+                    </form>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
