@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import user_login,dashboard,register
+from .views import user_login,dashboard,register,edit
 ## Djnago build in logout login 
 from django.contrib.auth import views as auth_views
 from django.urls import reverse_lazy
@@ -11,6 +11,7 @@ urlpatterns = [
     path('login/',auth_views.LoginView.as_view(),name='login'),
     path('logout/',auth_views.LogoutView.as_view(),name='logout'),
     path('dashboard/',dashboard,name='dashboard'),
+    path('edit/',edit,name='edit'),
     ##password changes
     path('password/change/',
     auth_views.PasswordChangeView.as_view(success_url=reverse_lazy('account:password_change_done')),

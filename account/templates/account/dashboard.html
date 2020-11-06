@@ -12,6 +12,25 @@
         {%endif %}
         <h4>Dashboard Area</h4>
     </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mt-2">
+                <div class="card-header">
+                    <h4><a href="{% url 'account:edit' %}"> Edit Your Profile</a></h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card mt-2">
+                <div class="card-header">
+                    <h4><a href="{% url 'account:password_change' %}"> Change Password</a></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 {% endblock %}

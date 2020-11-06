@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block title %}
+Edit
+    {% endblock %}
+
+{% block content %}
+
+{% if profile_form %}
+
+
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Edit Profile</h4>
+                </div>
+                <div class="card-body">
+                    <form action="" method="POST" enctype="multipart/form-data" class="form">
+                        {%csrf_token%}
+                            {% bootstrap_form user_form %}
+                            {% bootstrap_form profile_form %}
+
+                            {% buttons %}
+                            <button type="submit" class="btn btn-secondary">
+                                Save Changes
+                            </button>
+                            {% endbuttons %}
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+{% else %}
+<p>Print something</p>
+{%endif %}
+{% endblock %}

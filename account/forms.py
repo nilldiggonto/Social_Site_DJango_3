@@ -1,5 +1,22 @@
 from django import forms
 from django.contrib.auth.models import User
+from .models import Profile
+
+#User Profile Form
+class UserEditForm(forms.ModelForm):
+    class Meta:
+        model = User
+        
+        fields =('first_name','last_name','email')
+
+class ProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        labels = {
+            'dob':'Date of Birth',
+        }
+        fields = ('dob','photo')
+
 #Login Form
 class LoginForm(forms.Form):
     username        = forms.CharField()
