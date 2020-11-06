@@ -16,7 +16,7 @@
                     <h4>Login Form</h4>
                 </div>
                 <div class="card-body">
-                    {% form.errors %}
+                    {% if form.errors %}
                     <p class="text-danger">Something went worng. Check username and password again!!</p>
                     {%else %}
                     <p>Login Now!</p>
@@ -29,6 +29,10 @@
                         {% endbuttons%}
                     </form>
                    
+                </div>
+                <div class="card-footer">
+                    <p><a href="{% url 'account:password_reset' %}">Forgotten your password?</a></p>
+
                 </div>
             </div>
         </div>
