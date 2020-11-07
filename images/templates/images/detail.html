@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %} Image Create {% endblock %}
+
+
+{% block content %}
+   
+<div class="container">
+    <div class="jumbotron text-center bg-info text-white mt-2">
+        <h4>Photo Detail Page</h4>
+    </div>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card mt-4 mb-4">
+                <div class="card-header text-center">
+                    <h4>{{image.title}}</h4>
+                </div>
+                <div class="card-body text-center">
+                    
+                            <img src="{{ image.images.url }}" style="max-width: 100%; height: 350px;">
+                            <hr>
+                            <p>
+                          
+                            {{ image.description|linebreaks }}
+                           
+                            </p>
+                </div>
+
+                <div class="card-footer text-center">
+                    {% with total_likes=image.users_like.count %}
+                    <div class="image-info">
+                    <div>
+                    <span class="count">
+                    {{ total_likes }} like{{ total_likes|pluralize }}
+                    </span>
+                    
+                    <div class="image-likes">
+                    {% for user in image.users_like.all %}
+                    <div>
+                    <img src="{{ user.profile.photo.url }}">
+                    <p>{{ user.first_name }}</p>
+                    </div>
+                    {% empty %}
+                    Nobody likes this image yet.
+                    {% endfor %}
+                    </div>
+                    {% endwith %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
