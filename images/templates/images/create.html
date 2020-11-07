@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% load bootstrap4 %}
+
+{% block title %} Image Create {% endblock %}
+
+
+{% block content %}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h4>
+                        Bookmark Image
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <img src="{{request.GET.url}}" alt="" class="card-img-top">
+                </div>
+                <div class="card-footer">
+                    <form action="" method="POST"  class="form">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+
+                        {% buttons %} 
+                        <button type="submit" class="btn btn-secondary">Bookmark</button>
+                        {% endbuttons %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

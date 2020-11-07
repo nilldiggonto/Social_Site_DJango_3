@@ -6,7 +6,7 @@
 
 {% block content %}
 <div class="cotainer">
-    <div class="jumbotron text-center">
+    <div class="jumbotron text-center bg-success text-light">
         {% if request.user.is_authenticated %}
         <h3>Welcome {{request.user.username}}</h3>
         {%endif %}
@@ -16,18 +16,39 @@
     <div class="row">
         <div class="col-md-6">
             <div class="card mt-2">
-                <div class="card-header">
-                    <h4><a href="{% url 'account:edit' %}"> Edit Your Profile</a></h4>
+                <div class="card-header text-center">
+                    <h4><a class="btn btn-outline-info" href="{% url 'account:edit' %}"> Edit Your Profile</a></h4>
                 </div>
             </div>
         </div>
 
         <div class="col-md-6">
             <div class="card mt-2">
-                <div class="card-header">
-                    <h4><a href="{% url 'account:password_change' %}"> Change Password</a></h4>
+                <div class="card-header text-center">
+                    <h4><a class="btn btn-outline-info" href="{% url 'account:password_change' %}"> Change Password</a></h4>
                 </div>
             </div>
+        </div>
+    </div>
+
+
+
+    <div class="card mt-4">
+        <div class="card-header text-center bg-warning">
+            <h3>Bookmark Info</h3>
+        </div>
+        <div class="card-body">
+            {% with total_images_created=request.user.images_created.count %}
+                    <h4>You have bookmarked
+                    {{ total_images_created }} image{{ total_images_created|pluralize }}.</h4>
+            {% endwith %}
+        </div>
+
+        <div class="card-footer">
+            <p>Drag the following button to your bookmarks toolbar to bookmark
+                images from other websites → <a href="javascript:{% include
+                "bookmarklet_launcher.js" %}" class="button">Bookmark it</a>
+            </p>
         </div>
     </div>
 

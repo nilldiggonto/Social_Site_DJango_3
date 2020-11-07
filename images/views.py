@@ -7,6 +7,7 @@ from .models import Image
 
 @login_required
 def image_create(request):
+    # form = ImageCreateForm(data=request.GET)
     if request.method == 'POST':
         form = ImageCreateForm(data= request.POST)
         if form.is_valid():
@@ -21,5 +22,5 @@ def image_create(request):
             form = ImageCreateForm(data=request.GET)
     else:
         form = ImageCreateForm(data=request.GET)
-
-    return render(request,template_name,{'section':images,'form':form})
+    template_name = 'images/create.html'
+    return render(request,template_name,{'section':'images','form':form})
