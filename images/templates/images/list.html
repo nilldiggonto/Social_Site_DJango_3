@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Images bookmarked{% endblock %}
+
+
+<!-- % b lock content %}
+<h1>Images bookmarked</h1>
+<div id="image-list">
+{% include "images/image/list_ajax.html" %}
+</div> -->
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        {% for image in images %}
+        <div class="col-md-6 offset-md-3 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h4>{{image.title}}</h4>
+                </div>
+                <div class="card-body">
+                    <img src="{{image.images.url}}" alt="" class="img-fluid">
+                    
+                </div>
+                <div class="card-footer">
+                    <a href="{{image.get_absolute_url}}">Full Info</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
