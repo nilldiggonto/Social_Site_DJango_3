@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load thumbnail %}
 {% block title %} Image Create {% endblock %}
 
 
@@ -16,8 +16,12 @@
                     <h4>{{image.title}}</h4>
                 </div>
                 <div class="card-body text-center">
+
+                    <a href="{{ image.images.url }}">
+                        <img src="{% thumbnail image.images 300x0 %}" class="img-fluid">
+                        </a>
                     
-                            <img src="{{ image.images.url }}" style="max-width: 100%; height: 350px;">
+                            <!-- <img src="{{ image.images.url }}" style="max-width: 100%; height: 350px;"> -->
                             <hr>
                             <p>
                           
@@ -25,17 +29,35 @@
                            
                             </p>
                 </div>
-
+                     {%  with total_likes=image.users_like.count %}
+                     {%  with image.users_like.all as users_like %}
                 <div class="card-footer text-center">
-                    {% with total_likes=image.users_like.count %}
-                    <div class="image-info">
-                    <div>
-                    <span class="count">
-                    {{ total_likes }} like{{ total_likes|pluralize }}
-                    </span>
+                    
+                    <div class="">
+                        <span class="count">
+                            <span class=" total badge badge-danger">{{total_likes}}</span>
+                        {{ total_likes }} like{{ total_likes|pluralize }}
+                        </span>
+                        
+
+                        <a href="#" id='like' data-id="{{ image.id }}" data-action="
+                        {% if request.user in users_like %}un{% endif %}like"
+                            class="like btn btn-sm btn-success">
+                            {% if request.user not in users_like %}
+                            Like
+                            {% else %}
+                            Unlike
+                            {% endif %}
+                            </a>
+                    </div>
+                    
+                    
+
+                      
+
                     
                     <div class="image-likes">
-                    {% for user in image.users_like.all %}
+                    {% for user in users_like %}
                     <div>
                     <img src="{{ user.profile.photo.url }}">
                     <p>{{ user.first_name }}</p>
@@ -44,11 +66,60 @@
                     Nobody likes this image yet.
                     {% endfor %}
                     </div>
-                    {% endwith %}
+                 
                 </div>
+                {% endwith %}
+                {% endwith  %}
             </div>
         </div>
     </div>
 </div>
 
+
+
+
+
+
+
+
+
+
+
+
 {% endblock %}
+
+
+
+
+{% block domready %}
+        $('a#like').click(function(e){
+        e.preventDefault();
+        $.post('{% url "images:like" %}',
+
+        {
+        id: $(this).data('id'),
+        action: $(this).data('action')
+        },
+        
+        function(data){
+        if (data['status'] == 'ok')
+        {
+            console.log('working')
+        var previous_action = $('a.like').data('action');
+        // toggle data-action
+        $('a#like').data('action', previous_action == 'like' ?
+        'unlike' : 'like');
+        // toggle link text
+        $('a#like').text(previous_action == 'like' ? 'Unlike' :
+        'Like');
+        // update total likes
+        var previous_likes = parseInt($('span.count .total').
+        text());
+        $('span.count .total').text(previous_action == 'like' ?
+        previous_likes + 1 : previous_likes - 1);
+        }
+        }
+        );
+        });
+    {% endblock %}
+

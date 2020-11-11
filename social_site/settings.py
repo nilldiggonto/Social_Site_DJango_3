@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'social_django',
     'django_extensions',
     'sslserver',
+    'easy_thumbnails',
 ]
 
 MIDDLEWARE = [
@@ -42,8 +43,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
 
 ROOT_URLCONF = 'social_site.urls'
 
@@ -124,8 +125,8 @@ AUTHENTICATION_BACKENDS = [
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-SOCIAL_AUTH_FACEBOOK_KEY = '3770476629669761' # Facebook App ID
-SOCIAL_AUTH_FACEBOOK_SECRET = '025d9941fdf5183a84f8685932df5b0d' # Facebook App Secret
+SOCIAL_AUTH_FACEBOOK_KEY = '' # Facebook App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = '' # Facebook App Secret
 
 STATIC_URL = '/static/'
 
