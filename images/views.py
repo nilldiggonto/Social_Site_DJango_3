@@ -5,6 +5,7 @@ from .forms import ImageCreateForm
 from .models import Image
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
+from common.decorators import ajax_required
 # Create your views here.
 
 @login_required
@@ -41,6 +42,7 @@ def imaage_detail(request,id,slug):
 ############## AJAX
 @login_required
 @require_POST
+@ajax_required
 def image_like(request):
     img_id      = request.POST.get('id')
     action      = request.POST.get('action')
